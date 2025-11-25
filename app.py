@@ -78,17 +78,30 @@ else:
         "LEAPORD/M&P COURIER",
         "ENTERTAINMENT",
         "PRINTING & STATIONARY",
-        "MISC EXPENSE",
-        "GENERAL ITEM PURCHASE/REPAIR",
-        "ELECTRICAL ITEM PURCHASE/REPAIR",
-        "CHILLAR/AC ITEM PURCHASE/REPAIR",
-        "MACHINARY ITEM PURCHASE/REPAIR",
-        "FUEL VEHICLES",
+        "NEWSPAPER BILL",
+        "DIESEL FOR GENERATOR",
+        "TRANSPORTATION EXPENSE",
+        "BUILDING REPAIR",
+        "AGRICULTURE",
+        "ELECTRIC BILL",
         "UTILITTY BILL",
+        "CROCKERY ITEM PURCHASE",
+        "WATER TANKER",
+        "REPAIR MAINTANCE",
+        "FUEL VEHICLE",
+        "FUEL VEHICLE KIU 61898",
+        "GENERATOR ITEM PURCHASE AND REP",
+        "MACHINERY REPAIR",   
+        "GENERAL ITEM",
+        "A.C REPAIR",
+        "MISC EXPENSES",
+        "ELECTRICAL ITEM PURCHASE REPAIR",
+        "MEDICINE FOR CHICKS",
+        "MEDICAL BILL OF WORKER",        
         "TOOL TAX ON ROUTE",
         "PHONE EXPENSE ON ROUTE",
         "HATCHERY SALARY",
-        # Tu aur bhi add kar sakta hai
+        
     ]
 
     user_data = db[user]["expenses"]
@@ -162,4 +175,5 @@ else:
     st.markdown("---")
     st.success(f"### GRAND TOTAL ({selected_month}): **{total:,} PKR**") 
     st.info("Sab zero se start | Tum khud daalo | Har cheez save rahegi")
+
     st.caption("Developed by Muhammad Ashhad Khan 🤖")
