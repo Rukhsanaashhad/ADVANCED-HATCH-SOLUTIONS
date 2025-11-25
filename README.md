@@ -3,7 +3,7 @@
 **A Complete Expense Management System**  
 Built with **Python + Streamlit** – specially designed for Jadeed Hatchery Karachi  
 
-Live Demo: advanced-hatch-solutions.streamlit.app 
+Live Demo: [Click Here](https://advanced-hatch-solutions.streamlit.app/)
 
 ## Features
 
