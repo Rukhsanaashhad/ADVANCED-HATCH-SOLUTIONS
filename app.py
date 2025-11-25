@@ -17,7 +17,7 @@ def save_db():
     with open(DB_FILE, "w") as f:
         json.dump(st.session_state.db, f, indent=4)
 
-# Initialize
+# Initialize session state
 if "db" not in st.session_state:
     st.session_state.db = load_db()
 if "logged_in" not in st.session_state:
@@ -73,57 +73,51 @@ else:
     st.title("ADVANCED HATCH SOLUTIONS")
     st.markdown("### Monthly Expense Manager")
 
-    # All headings (zero se start)
+    # All headings
     headings = [
-        "LEAPORD/M&P COURIER",
-        "ENTERTAINMENT",
-        "PRINTING & STATIONARY",
-        "NEWSPAPER BILL",
-        "DIESEL FOR GENERATOR",
-        "TRANSPORTATION EXPENSE",
-        "BUILDING REPAIR",
-        "AGRICULTURE",
-        "ELECTRIC BILL",
-        "UTILITTY BILL",
-        "CROCKERY ITEM PURCHASE",
-        "WATER TANKER",
-        "REPAIR MAINTANCE",
-        "FUEL VEHICLE",
-        "FUEL VEHICLE KIU 61898",
-        "GENERATOR ITEM PURCHASE AND REP",
-        "MACHINERY REPAIR",   
-        "GENERAL ITEM",
-        "A.C REPAIR",
-        "MISC EXPENSES",
-        "ELECTRICAL ITEM PURCHASE REPAIR",
-        "MEDICINE FOR CHICKS",
-        "MEDICAL BILL OF WORKER",        
-        "TOOL TAX ON ROUTE",
-        "PHONE EXPENSE ON ROUTE",
-        "HATCHERY SALARY",
-        
+        "LEAPORD/M&P COURIER", "ENTERTAINMENT", "PRINTING & STATIONARY", "NEWSPAPER BILL",
+        "DIESEL FOR GENERATOR", "TRANSPORTATION EXPENSE", "BUILDING REPAIR", "AGRICULTURE",
+        "ELECTRIC BILL", "UTILITTY BILL", "CROCKERY ITEM PURCHASE", "WATER TANKER",
+        "REPAIR MAINTANCE", "FUEL VEHICLE", "FUEL VEHICLE KIU 61898",
+        "GENERATOR ITEM PURCHASE AND REP", "MACHINERY REPAIR", "GENERAL ITEM",
+        "A.C REPAIR", "MISC EXPENSES", "ELECTRICAL ITEM PURCHASE REPAIR",
+        "MEDICINE FOR CHICKS", "MEDICAL BILL OF WORKER", "TOOL TAX ON ROUTE",
+        "PHONE EXPENSE ON ROUTE", "HATCHERY SALARY"
     ]
 
     user_data = db[user]["expenses"]
-    current_month = datetime.now().strftime("%B %Y")
+    current_month = datetime.now().strftime("%B %Y")  # e.g. November 2025
 
-    
+    # Get all months safely
     saved_months = list(user_data.keys())
-    all_months = sorted(set([current_month] + saved_months), 
-                        key=lambda x: datetime.strptime(x, "%B %Y") if " " in x else datetime.now(), 
-                        reverse=True)
+    all_months = sorted(
+        set([current_month] + saved_months),
+        key=lambda x: datetime.strptime(x, "%B %Y"),
+        reverse=True
+    )
 
-    if "selected_month" not in st.session_state:
+    # SAFE MONTH SELECTION (No more ValueError!)
+    if "selected_month" not in st.session_state or st.session_state.selected_month not in all_months:
         st.session_state.selected_month = current_month
 
-    selected_month = st.selectbox("Select Month", options=all_months, 
-                                  index=all_months.index(st.session_state.selected_month))
+    # Safe index
+    try:
+        default_idx = all_months.index(st.session_state.selected_month)
+    except ValueError:
+        default_idx = 0
 
+    selected_month = st.selectbox(
+        "Select Month",
+        options=all_months,
+        index=default_idx
+    )
+
+    # Update session state
     if selected_month != st.session_state.selected_month:
         st.session_state.selected_month = selected_month
         st.rerun()
 
-    
+    # Initialize month if not exists
     if selected_month not in user_data:
         user_data[selected_month] = {heading: 0 for heading in headings}
         save_db()
@@ -150,7 +144,7 @@ else:
     with col1:
         if st.button("SAVE DATA", type="primary"):
             save_db()
-            st.success("Saved!")
+            st.success("All Data Saved Successfully!")
             st.balloons()
 
     with col2:
@@ -169,11 +163,14 @@ else:
             output = BytesIO()
             df.to_excel(output, index=False, engine='openpyxl')
             output.seek(0)
-            st.download_button("Download Excel", data=output, 
-                               file_name=f"Jadeed_{selected_month}.xlsx")
+            st.download_button(
+                "Download Excel File",
+                data=output,
+                file_name=f"AdvancedHatch_{selected_month}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
 
     st.markdown("---")
-    st.success(f"### GRAND TOTAL ({selected_month}): **{total:,} PKR**") 
-    st.info("Sab zero se start | Tum khud daalo | Har cheez save rahegi")
-
-    st.caption("Developed by Muhammad Ashhad Khan 🤖")
+    st.success(f"### GRAND TOTAL ({selected_month}): **{total:,} PKR**")
+    st.info("All entries start from zero | You enter exactly what you want | Data saves forever")
+    st.caption("Developed with ❤️ by Muhammad Ashhad Khan")
