@@ -1,0 +1,37 @@
+{
+    "ashhad": {
+        "password": "khan",
+        "expenses": {
+            "November 2025": {
+                "LEAPORD/M&P COURIER": 200,
+                "ENTERTAINMENT": 0,
+                "PRINTING & STATIONARY": 200,
+                "MISC EXPENSE": 120,
+                "GENERAL ITEM PURCHASE/REPAIR": 90,
+                "ELECTRICAL ITEM PURCHASE/REPAIR": 10,
+                "CHILLAR/AC ITEM PURCHASE/REPAIR": 100,
+                "MACHINARY ITEM PURCHASE/REPAIR": 10,
+                "FUEL VEHICLES": 10,
+                "UTILITTY BILL": 10,
+                "TOOL TAX ON ROUTE": 10,
+                "PHONE EXPENSE ON ROUTE": 10,
+                "HATCHERY SALARY": 100
+            },
+            "December 2025": {
+                "LEAPORD/M&P COURIER": 2000,
+                "ENTERTAINMENT": 1090,
+                "PRINTING & STATIONARY": 2900,
+                "MISC EXPENSE": 1000,
+                "GENERAL ITEM PURCHASE/REPAIR": 1000,
+                "ELECTRICAL ITEM PURCHASE/REPAIR": 1900,
+                "CHILLAR/AC ITEM PURCHASE/REPAIR": 2000,
+                "MACHINARY ITEM PURCHASE/REPAIR": 2000,
+                "FUEL VEHICLES": 100,
+                "UTILITTY BILL": 1000,
+                "TOOL TAX ON ROUTE": 2000,
+                "PHONE EXPENSE ON ROUTE": 2000,
+                "HATCHERY SALARY": 2000
+            }
+        }
+    }
+}
